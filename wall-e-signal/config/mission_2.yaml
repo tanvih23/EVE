@@ -1,0 +1,41 @@
+grid:
+  width: 25
+  height: 20
+  seed: 99
+  obstacle_density: 0.18
+  recharge_stations:
+    - [5, 12]
+    - [18, 8]
+    - [10, 20]
+
+eve:
+  position: [19, 3]
+  status: active
+  signal_strength: 6.0       # weaker signal cuz mission 2 is harder
+
+initial_signal:
+  direction: 200.0
+  strength: 0.15
+  timestamp: 0
+
+clues:
+  seed: 99
+  count: 8
+
+decoys:
+  - position: [6, 15]
+    strength: 5.0              # almost as strong as EVE
+  - position: [14, 22]
+    strength: 3.0
+
+agent:
+  start: [0, 0]
+  battery: 150
+  battery_per_move: 1
+  battery_per_scan: 4
+  battery_recharge: 35
+  scan_radius: 2              # shorter scan range
+  signal_noise_std: 1.2       # noisier sensors as compared to easier mission 1
+
+time:
+  max_steps: 300

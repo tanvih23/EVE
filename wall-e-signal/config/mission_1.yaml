@@ -1,0 +1,36 @@
+grid:
+  width: 20
+  height: 15
+  seed: 42
+  obstacle_density: 0.12
+  recharge_stations:
+    - [3, 10]
+    - [12, 5]
+
+eve:
+  position: [13, 17]        
+  status: dormant            
+  signal_strength: 8.0      
+
+initial_signal:
+  direction: 42.0            
+  strength: 0.3              
+  timestamp: 0
+
+clues:
+  seed: 42
+  count: 6
+
+decoys: []                   # therell be no decoys in mission 1
+
+agent:
+  start: [0, 0]
+  battery: 120
+  battery_per_move: 1
+  battery_per_scan: 3
+  battery_recharge: 40
+  scan_radius: 3
+  signal_noise_std: 0.8
+
+time:
+  max_steps: 200
