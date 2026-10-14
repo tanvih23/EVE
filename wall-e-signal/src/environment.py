@@ -1,15 +1,19 @@
-#basically the 3d world wall-e explores including the charging stations, the clues eve leave 
+#basically the 3d world wall-e explores including the charging stations, the clues eve leave
 #for him etc.
 import numpy as np
 import yaml
 
 
 class Environment:
-#the simulated world which is loaded from the yaml files
+    
+    #the simulated world that wall-e explores loaded from the yaml files
 
-    def __init__(self, config_path):
-        with open(config_path, 'r') as f:
-            self.config = yaml.safe_load(f)
+    def __init__(self, config):
+        if isinstance(config, dict):
+            self.config = config
+        else:
+            with open(config, 'r') as f:
+                self.config = yaml.safe_load(f)
 
         grid_cfg = self.config['grid']
         self.width = grid_cfg['width']
@@ -18,7 +22,11 @@ class Environment:
 
         # 0=empty 1=obstacle 2=recharge
         self.grid = np.zeros((self.height, self.width), dtype=int)
-        self._place_obstacles(grid_cfg.get('obstacle_density', 0.15))
+        prebuilt = grid_cfg.get('_prebuilt_obstacles', None)
+        if prebuilt is not None:
+            self.grid = np.array(prebuilt, dtype=int)
+        else:
+            self._place_obstacles(grid_cfg.get('obstacle_density', 0.15))
         self._place_recharge_stations(grid_cfg.get('recharge_stations', []))
 
         #the true state eve is in that the agent will never read directly
@@ -61,7 +69,7 @@ class Environment:
     # grid construction
 
     def _place_obstacles(self, density):
-        """Randomly place obstacles, avoiding start position and EVE."""
+        #randomly placing obstacles avoiding start position and eve
         n = int(self.width * self.height * density)
         start = tuple(self.config['agent']['start'])
         eve = tuple(self.config['eve']['position'])
@@ -89,7 +97,7 @@ class Environment:
         clue_rng = np.random.RandomState(clue_cfg.get('seed', 123))
 
         if 'positions' in clue_cfg:
-            
+
             for pos_info in clue_cfg['positions']:
                 r, c = pos_info['position']
                 self.clues[(r, c)] = {
@@ -127,7 +135,7 @@ class Environment:
                 }
                 placed += 1
 
-    #Signal physics
+    #signal physics
 
     def signal_at(self, pos):
         #basically combines eve's sig, the decoys and the noise and the particle filter tells
@@ -152,7 +160,7 @@ class Environment:
         return self.signal_base / (1.0 + dist_sq)
 
     def signal_model_clean(self, agent_pos, eve_hypothesis):
-        
+
         #what the expected signal would be if eve was at a position
         ar, ac = agent_pos
         er, ec = int(eve_hypothesis[0]), int(eve_hypothesis[1])
