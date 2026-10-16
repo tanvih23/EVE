@@ -1,8 +1,8 @@
 # finding eve
 
-A little robot wakes up on a dead planet. Somewhere out there is EVE. He can't see her — all he gets is a faint, noisy signal that pings louder when he's closer, a few scattered clues, and a battery that won't last forever. There are even fake beacons planted around to throw him off. His job: figure out where EVE is and get to her before the power runs out.
+A little robot wakes up on a dead planet. Somewhere out there is EVE. He can't see her, all he gets is a faint, noisy signal that pings louder when he's closer, a few scattered clues, and a battery that won't last forever. There are even fake beacons planted around to throw him off. His job: figure out where EVE is and get to her before the power runs out.
 
-That's the whole project. Under the cute framing it's a question I find genuinely interesting: **how should an agent act when it doesn't know where the thing it's looking for is, and every move costs something?** Not "walk toward the loudest beep" (that walks you straight into a decoy), but something closer to how a good searcher actually thinks — *where would a measurement teach me the most right now?*
+That's the whole project. Under the cute framing it's a question I find genuinely interesting: **how should an agent act when it doesn't know where the thing it's looking for is, and every move costs something?** 
 
 That idea has a name: **epistemic foraging**. The agent forages for information, not just for the goal.
 
@@ -120,8 +120,4 @@ The front end is its own thing — a single page that lets you actually *watch* 
 
 ---
 
-## why I built it this way
-
-I could have made a flashier demo that cheated — hardcode the path, fake the "thinking." I didn't, because the interesting claim here is that *good search behaviour emerges from reasoning about uncertainty*, and that's only worth anything if the thing on screen is the thing actually running. So the benchmark is the heart of it, and the website is just an honest window into what the benchmark proves.
-
-Built by Tanvi · for TAM-VIT.
+Built by Tanvi<3
