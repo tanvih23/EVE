@@ -1,10 +1,11 @@
 <title>finding eve</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=League+Spartan:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=League+Spartan:wght@400;500;600;700&family=Abril+Fatface&family=Press+Start+2P&display=swap">
 
 <style>
 :root {
   --cream: #f2e6d4;
-  --pink: #e58bc0;
+  --pink: #aec38c;
+  --display: 'Abril Fatface', Georgia, serif;
   color-scheme: dark;
 }
 
@@ -24,7 +25,7 @@ body {
   position: fixed; inset: 0; z-index: 0;
   width: 100%; height: 100%;
   display: block;
-  filter: hue-rotate(63deg) saturate(1.32) brightness(1);
+  filter: saturate(1.05) brightness(1);
   opacity: 1;
 }
 
@@ -56,8 +57,8 @@ body {
 .title { position: relative; display: inline-block; text-align: left; margin: 0 }
 .l1 {
   display: block;
-  font-family: 'Playfair Display', serif;
-  font-style: italic; font-weight: 500;
+  font-family: var(--display);
+  font-weight: 500;
   font-size: clamp(24px, 4.4vw, 52px);
   color: var(--cream);
   margin-left: 4%;
@@ -78,54 +79,32 @@ body {
   text-shadow: 0 3px 0 #1a0714, 0 0 7px #000;
 }
 
-/* ShaderButtons — original "induction" build: an electric neon border that
-   crackles via an animated SVG turbulence/displacement filter. hue 116 is
-   applied to the whole group (cyan core -> magenta, matching VALENCE CORE). */
+/* hero CTA buttons — same plain neumorphic style as the mission controls */
 .cta {
   position: fixed; left: 50%; top: 80%;
   transform: translate(-50%, -50%);
-  z-index: 3; display: flex; gap: 30px;
-  filter: hue-rotate(116deg) saturate(1) brightness(1);
+  z-index: 3; display: flex; gap: 24px;
 }
 .ibtn {
-  position: relative; isolation: isolate;
-  background: rgba(8,4,12,.80);
-  border: none; border-radius: 16px;
-  padding: 20px clamp(26px, 4vw, 48px);
-  color: #e2f7ff;
-  font-family: system-ui, 'Segoe UI', sans-serif;
+  position: relative;
+  background: #1a1a1d; border: 1px solid rgba(255,255,255,.05);
+  border-radius: 14px;
+  padding: 18px clamp(26px, 4vw, 48px);
+  color: rgba(242,230,212,.85);
+  font-family: 'League Spartan', sans-serif;
   font-weight: 600;
   font-size: clamp(11px, 1.3vw, 15px);
-  letter-spacing: 0.32em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   cursor: pointer; pointer-events: auto;
-  text-shadow: 0 0 9px rgba(120,230,255,.6);
-  transition: transform .12s, background .15s;
-}
-.ibtn::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  border-radius: 16px;
-  border: 2px solid #7fe9ff;
-  box-shadow:
-    0 0 6px #4fe3ff,
-    0 0 16px #4fe3ff,
-    0 0 30px rgba(79,227,255,.55),
-    inset 0 0 12px rgba(79,227,255,.5);
-  pointer-events: none;
-  transition: box-shadow .2s, border-color .2s;
+  box-shadow: 0 3px 10px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05), inset 0 -2px 6px rgba(0,0,0,.35);
+  transition: box-shadow .16s, transform .15s cubic-bezier(.2,.8,.2,1), color .15s;
 }
 .ibtn:hover, .ibtn:focus-visible {
-  transform: translateY(-2px); background: rgba(22,8,28,.85); outline: none;
+  color: #f2e6d4; outline: none; transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 6px rgba(0,0,0,.28);
 }
-.ibtn:hover::before, .ibtn:focus-visible::before {
-  border-color: #aef2ff;
-  box-shadow:
-    0 0 10px #7fe9ff,
-    0 0 28px #4fe3ff,
-    0 0 50px rgba(79,227,255,.85),
-    inset 0 0 18px rgba(79,227,255,.7);
-}
-.ibtn:active { transform: translateY(0) }
+.ibtn:active { transform: translateY(1px) scale(.97); box-shadow: inset 0 3px 10px rgba(0,0,0,.72), inset 0 -1px 0 rgba(255,255,255,.04) }
 
 @media (max-width: 560px) {
   .cta { flex-direction: column; gap: 14px; top: 76% }
@@ -134,7 +113,7 @@ body {
 /* ===== mission screen — same design, now scrollable with live analysis ===== */
 #mission {
   position: fixed; inset: 0; z-index: 10; overflow-y: auto; overflow-x: hidden;
-  background: rgba(8,4,12,.84); backdrop-filter: blur(2px);
+  background: rgba(7,11,8,.82); backdrop-filter: blur(2px);
   color: var(--cream); font-family: 'League Spartan', system-ui, sans-serif;
   scroll-behavior: smooth;
 }
@@ -145,83 +124,67 @@ body.mopen .ui, body.mopen .cta, body.mopen .scrim, body.mopen #c { display: non
 .mhead {
   position: sticky; top: 0; z-index: 5;
   display: flex; align-items: center; gap: 12px; padding: 14px 20px;
-  border-bottom: 1px solid rgba(229,139,192,.22);
-  background: rgba(10,5,14,.88); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(150,180,130,.14);
+  background: rgba(8,12,9,.9); backdrop-filter: blur(8px);
 }
-.mtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(15px, 2vw, 23px); color: var(--pink); flex: 1; letter-spacing: .5px }
+.mtitle { font-family: var(--display); font-weight: 600; font-size: clamp(15px, 2vw, 22px); color: var(--cream); flex: 1; letter-spacing: .2px }
 .moutcome { font-weight: 700; font-size: clamp(10px,1.4vw,14px); letter-spacing: .06em; text-transform: uppercase }
+/* plain neumorphic control buttons — soft depth, no colour shift (reference) */
 .nbtn {
-  position: relative; overflow: hidden;
+  position: relative;
   font-family: 'League Spartan', sans-serif; font-weight: 600; font-size: 12px;
-  letter-spacing: .07em; text-transform: uppercase; color: #f4e6f2;
-  background: rgba(14,7,18,.78); border: 1.5px solid rgba(227,107,208,.8);
-  border-radius: 8px; padding: 11px 18px; cursor: pointer; white-space: nowrap;
-  box-shadow: 0 0 6px rgba(227,107,208,.35), inset 0 0 10px rgba(227,107,208,.12);
-  transition: background .18s, color .18s, box-shadow .18s, border-color .18s, transform .1s;
+  letter-spacing: .07em; text-transform: uppercase; color: rgba(242,230,212,.82);
+  background: #1a1a1d; border: 1px solid rgba(255,255,255,.05);
+  border-radius: 11px; padding: 11px 18px 11px 18px; cursor: pointer; white-space: nowrap;
+  box-shadow: 0 2px 7px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05), inset 0 -2px 5px rgba(0,0,0,.35);
+  transition: box-shadow .16s, transform .14s cubic-bezier(.2,.8,.2,1), color .15s;
 }
-/* static dot-matrix surface */
-.nbtn::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background-image: radial-gradient(rgba(243,130,224,.22) 1px, transparent 1.5px);
-  background-size: 7px 7px;
-  -webkit-mask: radial-gradient(130% 150% at 50% 50%, #000 52%, transparent 100%);
-  mask: radial-gradient(130% 150% at 50% 50%, #000 52%, transparent 100%);
-  opacity: .5;
-}
-/* hover = fill with magenta, flip to dark ink */
-.nbtn:hover {
-  background: linear-gradient(180deg, #f58fdc, #e24fb4);
-  color: #1a0714; border-color: #f7b2e6;
-  box-shadow: 0 0 16px rgba(243,130,224,.6), 0 0 30px rgba(227,107,208,.32);
-  transform: translateY(-1px);
-}
-.nbtn:hover::before { opacity: .25 }
-.nbtn:active { transform: translateY(0) }
+.nbtn:hover { color: #f2e6d4; transform: translateY(-3px); box-shadow: 0 7px 18px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 5px rgba(0,0,0,.28) }
+.nbtn:active { transform: translateY(1px) scale(.975); box-shadow: inset 0 3px 9px rgba(0,0,0,.72), inset 0 -1px 0 rgba(255,255,255,.04) }
 
 .mtop { min-height: calc(100% - 56px); display: flex; flex-direction: column }
 .mbody { flex: 1; display: flex; min-height: 0 }
 .mstage { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 18px 16px 8px }
-.gridhead { width: 100%; max-width: 560px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; opacity: .72 }
-.gh-dim { opacity: .55 }
-#mgrid { image-rendering: pixelated; border-radius: 8px; box-shadow: 0 0 44px rgba(150,50,130,.3), inset 0 0 0 1px rgba(229,139,192,.2) }
+.gridhead { width: 100%; max-width: 720px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .62 }
+.gh-dim { opacity: .5 }
+#mgrid { image-rendering: pixelated; border-radius: 10px; box-shadow: 0 0 60px rgba(60,130,85,.28), 0 10px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(150,180,130,.18) }
 .mcap { font-family: 'League Spartan', sans-serif; font-size: clamp(11px,1.6vw,14px); color: rgba(242,230,212,.72); text-align: center; max-width: 640px; line-height: 1.5; letter-spacing: .02em }
 
 .mhud {
-  width: clamp(150px,19vw,220px); border-left: 1px solid rgba(229,139,192,.22);
-  padding: 18px 16px; display: flex; flex-direction: column; gap: 16px; background: rgba(10,5,14,.4);
+  width: clamp(122px,15vw,166px); border-left: 1px solid rgba(150,180,130,.14);
+  padding: 16px 14px; display: flex; flex-direction: column; gap: 13px; background: rgba(10,13,10,.35);
 }
-.tlabel { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; opacity: .5; margin-bottom: 6px }
-.tval { font-weight: 700; font-size: 20px }
-.bar { height: 11px; border: 1px solid rgba(79,227,255,.5); border-radius: 6px; overflow: hidden; background: rgba(0,0,0,.4) }
-.bar > i { display: block; height: 100%; background: linear-gradient(90deg,#4fe3ff,#e58bc0); transition: width .12s }
-.chip { display: inline-block; font-weight: 700; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; padding: 5px 11px; border-radius: 7px; color: #10060e }
-.legend { font-size: 12px; line-height: 1.95; opacity: .82; margin-top: auto }
-.legend b { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 8px }
+.tlabel { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; opacity: .42; margin-bottom: 4px }
+.tval { font-weight: 700; font-size: 14px; opacity: .88 }
+.bar { height: 6px; border: 1px solid rgba(120,160,120,.3); border-radius: 4px; overflow: hidden; background: rgba(0,0,0,.4) }
+.bar > i { display: block; height: 100%; background: linear-gradient(90deg,#4fe3ff,#6fc99a); transition: width .12s }
+.chip { display: inline-block; font-weight: 700; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; padding: 4px 9px; border-radius: 7px; color: #10060e }
+.legend { font-size: 9.5px; line-height: 1.55; opacity: .6; margin-top: auto }
+.legend b { display: inline-block; width: 7px; height: 7px; border-radius: 2px; vertical-align: 0; margin-right: 6px }
 
-.mctrl { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-top: 1px solid rgba(229,139,192,.22); flex-wrap: wrap }
-#mScrub { flex: 1; min-width: 120px; accent-color: #e58bc0; cursor: pointer }
+.mctrl { display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px solid rgba(150,180,130,.14); flex-wrap: wrap }
+#mScrub { flex: 1; min-width: 120px; accent-color: #6fc99a; cursor: pointer }
 #mStepLbl { font-weight: 700; font-size: 13px; opacity: .85; min-width: 72px; text-align: right }
 .mscroll { display: flex; justify-content: center; padding: 4px 0 18px }
-.mscroll .nbtn { border-color: rgba(229,139,192,.5); color: var(--pink); box-shadow: 0 0 10px rgba(229,139,192,.2) }
-.mscroll .nbtn:hover { background: linear-gradient(180deg,#f58fdc,#e24fb4); color: #1a0714; border-color: #f7b2e6 }
+.mscroll .nbtn:hover { color: #f2e6d4 }
 
 /* analysis */
-.manalysis { border-top: 1px solid rgba(229,139,192,.22); padding: 28px 20px 64px; max-width: 920px; margin: 0 auto; width: 100%; box-sizing: border-box }
+.manalysis { border-top: 1px solid rgba(150,180,130,.22); padding: 28px 20px 64px; max-width: 920px; margin: 0 auto; width: 100%; box-sizing: border-box }
 .asec { margin-bottom: 30px }
 .asec h2 { font-family: 'League Spartan', sans-serif; font-weight: 700; font-size: clamp(19px,2.6vw,27px); color: var(--cream); margin: 0 0 4px; letter-spacing: .01em }
 .asec .sub { font-size: 12.5px; opacity: .6; margin: 0 0 16px }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px,1fr)); gap: 12px }
-.acard { background: rgba(14,7,18,.7); border: 1px solid rgba(229,139,192,.22); border-radius: 12px; padding: 14px 16px }
+.acard { background: rgba(14,7,18,.7); border: 1px solid rgba(150,180,130,.22); border-radius: 12px; padding: 14px 16px }
 .acard .al { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; opacity: .5 }
 .acard .av { font-weight: 700; font-size: 22px; margin: 6px 0 2px }
 .acard .ah { font-size: 11px; opacity: .55 }
 .acard .av.cy { color: #4fe3ff } .acard .av.pk { color: var(--pink) } .acard .av.gr { color: #50e68c }
-.rec { border-left: 3px solid var(--pink); background: rgba(40,16,34,.5); border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 16px; font-size: 13.5px; line-height: 1.5 }
+.rec { border-left: 3px solid var(--pink); background: rgba(22,30,18,.5); border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 16px; font-size: 13.5px; line-height: 1.5 }
 .rec b { color: var(--pink); display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 5px }
 .rec[hidden] { display: none }
 
-.dlog { max-height: 340px; overflow-y: auto; border: 1px solid rgba(229,139,192,.2); border-radius: 12px; background: rgba(8,4,12,.5); padding: 6px }
-.dentry { border-left: 3px solid rgba(229,139,192,.4); padding: 8px 12px; margin: 4px 2px; font-size: 12.5px; line-height: 1.45 }
+.dlog { max-height: 340px; overflow-y: auto; border: 1px solid rgba(150,180,130,.2); border-radius: 12px; background: rgba(8,4,12,.5); padding: 6px }
+.dentry { border-left: 3px solid rgba(150,180,130,.4); padding: 8px 12px; margin: 4px 2px; font-size: 12.5px; line-height: 1.45 }
 .dentry .dh { font-weight: 700 }
 .dentry .dstep { color: var(--pink) } .dentry .dact { color: #4fe3ff }
 .dentry .dobs { opacity: .6; font-size: 11.5px }
@@ -231,8 +194,8 @@ body.mopen .ui, body.mopen .cta, body.mopen .scrim, body.mopen #c { display: non
 /* intro / guide card */
 .mintro { position: fixed; inset: 0; z-index: 12; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(6,3,10,.72); backdrop-filter: blur(4px) }
 .mintro[hidden] { display: none }
-.mcard { max-width: 548px; width: 100%; background: rgba(14,7,18,.95); border: 1.5px solid rgba(229,139,192,.5); border-radius: 16px; padding: 26px 30px; box-shadow: 0 0 44px rgba(180,60,150,.35) }
-.mcard h3 { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; font-size: clamp(22px,3vw,30px); color: var(--cream); margin: 0 0 14px }
+.mcard { max-width: 548px; width: 100%; background: rgba(12,15,12,.96); border: 1.5px solid rgba(150,180,130,.4); border-radius: 16px; padding: 26px 30px; box-shadow: 0 0 44px rgba(40,80,55,.35) }
+.mcard h3 { font-family: var(--display); font-weight: 700; font-size: clamp(22px,3vw,30px); color: var(--cream); margin: 0 0 14px }
 .mcard p { font-size: 14px; line-height: 1.6; color: rgba(242,230,212,.9); margin: 0 0 12px }
 .mcard ul { margin: 0 0 16px; padding-left: 18px; display: flex; flex-direction: column; gap: 8px }
 .mcard li { font-size: 13.5px; line-height: 1.5; color: rgba(242,230,212,.85) }
@@ -240,7 +203,7 @@ body.mopen .ui, body.mopen .cta, body.mopen .scrim, body.mopen #c { display: non
 
 @media (max-width: 680px) {
   .mbody { flex-direction: column }
-  .mhud { width: auto; border-left: none; border-top: 1px solid rgba(229,139,192,.22);
+  .mhud { width: auto; border-left: none; border-top: 1px solid rgba(150,180,130,.22);
           flex-direction: row; flex-wrap: wrap; gap: 14px; align-items: center; background: transparent }
   .legend { display: none }
 }
@@ -388,19 +351,19 @@ vec3 ribbon(vec2 uv, float idx, vec3 color, float t){
 }
 
 vec3 field(vec2 uv, float t){
-  vec3 cyan   = vec3(0.10, 0.72, 1.00);
-  vec3 indigo = vec3(0.35, 0.30, 0.95);
-  vec3 purple = vec3(0.62, 0.20, 0.90);
+  vec3 olive = vec3(0.56, 0.58, 0.22);
+  vec3 moss  = vec3(0.30, 0.54, 0.26);
+  vec3 fern  = vec3(0.17, 0.42, 0.25);
 
   vec3 col = vec3(0.0);
-  col += ribbon(uv, 0.0, cyan,   t);
-  col += ribbon(uv, 1.0, indigo, t);
-  col += ribbon(uv, 2.0, purple, t);
+  col += ribbon(uv, 0.0, olive, t);
+  col += ribbon(uv, 1.0, moss,  t);
+  col += ribbon(uv, 2.0, fern,  t);
 
   // soft bloom spots on the right
   float b1 = exp(-length((uv - vec2(0.78, 0.40)) * vec2(1.0, 1.3)) * 4.0);
   float b2 = exp(-length((uv - vec2(0.90, 0.68)) * vec2(1.0, 1.3)) * 5.0);
-  col += cyan * 0.45 * b1 + purple * 0.5 * b2;
+  col += olive * 0.42 * b1 + fern * 0.5 * b2;
 
   // keep the left side darker
   col *= smoothstep(0.0, 0.6, uv.x + 0.12);
@@ -429,7 +392,7 @@ void main(){
   float r = 0.5 * sqrt(clamp(inten, 0.0, 1.0));
   float dot = smoothstep(r, r - 0.14, length(cc));
 
-  vec3 outc = c * dot + vec3(0.18, 0.22, 0.4) * (inten * dot * 0.25);
+  vec3 outc = c * dot + vec3(0.16, 0.18, 0.09) * (inten * dot * 0.25);
   outc *= 0.9 + 0.1 * sin(frag.y * 0.7);             // scanline
   outc += (hash(frag + uTime) - 0.5) * 0.03;         // film grain
   outc *= uBrightness;
@@ -679,8 +642,8 @@ requestAnimationFrame(frame);
   function layoutGrid() {
     const d = M.data; if (!d) return;
     const stage = cv.parentElement;
-    const availW = Math.min(stage.clientWidth, 560);
-    const availH = Math.min(window.innerHeight * 0.52, 460);   // reduced grid size
+    const availW = Math.min(stage.clientWidth, 720);
+    const availH = Math.min(window.innerHeight * 0.64, 560);   // grid is the focal point
     const cell = Math.max(5, Math.floor(Math.min(availW / d.meta.w, availH / d.meta.h)));
     M.cell = cell;
     const gw = cell * d.meta.w, gh = cell * d.meta.h;
